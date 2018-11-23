@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="di_generer_tarifs_wiz" model="ir.ui.view">
+        <field name="name">di.generer.tarifs.form</field>
+        <field name="model">di.gen.tar.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Génération Tarifs de vente">
+            	<group>                
+	                <group>                                              
+	                    <field name="di_tarif_orig_id" string="Code tarif origine"/>       
+	                    <field name="di_date_effet_orig" string="Date d'effet des tarifs à reprendre"/>
+	                </group>                   
+	                <group>        
+	                    <field name="di_date_effet" string="Date d'effet nouveaux tarifs"/>                
+	                    <field name="di_date_fin" string="Date de fin nouveaux tarifs"/>                                           
+	                </group>
+	            </group>
+                <separator />
+                <label for="di_tarifs_dest_ids" string="Code tarifs à générer" />
+                <field name="di_tarifs_dest_ids">
+                    <tree order="name">
+                        <field name="name" />
+                        <field name="di_des" />
+                        <field name="di_coef" />                          
+                    </tree>
+                </field>
+                <footer>
+                    <button string="Générer les tarifs" type="object" name="generer_tarifs"
+                        default_focus="1" />
+                    <button string="Annuler" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window
+        id="action_di_generer_tarifs_di_tarifs_wiz"
+        context="{'di_prg_orig': 'di.tarifs'}"
+        multi="False"
+        key2="client_action_multi"
+        name="Génération Tarifs de vente"
+        res_model="di.gen.tar.wiz"
+        src_model="di.tarifs"
+        view_mode="form"
+        target="new"
+        view_type="form"
+        view_id="di_generer_tarifs_wiz">    
+    </act_window>
+    <act_window
+        id="action_di_generer_tarifs_di_code_tarif_wiz"
+        context="{'di_prg_orig': 'di.code.tarif'}"
+        multi="False"
+        key2="client_action_multi"
+        name="Génération Tarifs de vente"
+        res_model="di.gen.tar.wiz"
+        src_model="di.code.tarif"
+        view_mode="form"
+        target="new"
+        view_type="form"
+        view_id="di_generer_tarifs_wiz">    
+    </act_window>
+    <act_window
+        id="action_di_generer_tarifs_menu_wiz"        
+        multi="False"
+        key2="client_action_multi"
+        name="Génération Tarifs de vente"
+        res_model="di.gen.tar.wiz"
+        view_mode="form"
+        target="new"
+        view_type="form"
+        view_id="di_generer_tarifs_wiz">    
+    </act_window>
+    
+
+</odoo>

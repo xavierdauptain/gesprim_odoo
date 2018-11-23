@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Surcharge étiquette article  -->
+	<template id="di_report_simple_label" inherit_id="product.report_simple_label">
+		<!-- ajout entêtes -->
+		<xpath expr="//div[1]" position="replace">
+			<div t-if="product.barcode">
+				<table style="border-spacing:0;margin-bottom:0;height:122px;" class="table">
+					<thead>
+						<tr>
+							<td style="border: 2px solid black;" colspan="2" class="col-xs-8 danger">
+								<t t-if="product.default_code">
+									[
+									<strong t-field="product.default_code" />
+									]
+								</t>
+								<strong t-field="product.name" />
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="border: 2px solid black;text-align: center; vertical-align: middle;" class="col-xs-5">
+								<img t-if="product.barcode"
+									t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', product.barcode, 600, 150)"
+									style="width:100%;height:80%;" />
+								<span t-field="product.barcode" />
+							</td>
+							<td style="border: 2px solid black; text-align: center;" class="col-xs-3">
+								<h4>
+									<strong t-field="product.company_id.currency_id.symbol" />
+									<strong t-field="product.list_price" />
+								</h4>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</xpath>
+	</template>
+	<!-- Etiquette ligne achat ou étiquette lot depuis fiche article-->
+	<template id="di_report_lot_label">
+		<div t-if="l.product_id.barcode">
+			<t t-if="l.di_nb_colis">
+				<t t-set="poids" t-value="l.di_poin/l.di_nb_colis"/>
+			</t>
+			<t t-else="">
+				<t t-set="poids" t-value="l.di_poin"/>
+			</t>			
+			<t t-foreach="range(l.di_nb_colis)" t-as="k">
+				<!-- <table style="border-spacing:0;margin-bottom:0;height:122px;" class="table"> -->
+				<table style="border: 1px solid black;height:350px;">
+					<tr>
+						<td style="text-align: center;" class="col-xs-8" colspan="4">
+							<h2 t-field="doc.company_id.name" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center;font-size:1.2em;" colspan="4">
+							<span t-field="doc.company_id.street" />
+							<span> - </span>
+							<span t-field="doc.company_id.zip" />
+							<span> - </span>
+							<span t-field="doc.company_id.city" />
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align: middle;text-align: center;height:40px;" class="col-xs-8" colspan="4">
+							<t t-if="l.product_id.default_code">
+								[
+								<strong t-field="l.product_id.default_code" />
+								]
+							</t>
+							<strong t-field="l.product_id.name" />
+						</td>
+					</tr>
+					<tr style="border: 1px solid black;">
+						<td class="col-xs-2">Lot</td>
+						<t t-if="l.order_id">
+							<td class="col-xs-2"><span t-field="l.order_id.name"/></td>														
+						</t>
+						<t t-else="">							
+							<td class="col-xs-2"><span t-field="l.di_lot_txt"/></td>							
+						</t>
+						<td style="border-left: 1px solid black;" class="col-xs-2">&amp;nbsp;</td>
+						<td class="col-xs-2">&amp;nbsp;</td>
+					</tr>		
+					<tr style="border: 1px solid black;">
+						<td class="col-xs-2">Calibre</td>
+						<td class="col-xs-2"><span t-field="l.product_id.di_calibre_id"/></td>
+						<td style="border-left: 1px solid black;" class="col-xs-2">Origine</td>
+						<td class="col-xs-2"><span t-field="l.product_id.di_origine_id"/></td>
+					</tr>
+					<tr style="border: 1px solid black;">
+						<td class="col-xs-2">Catégorie</td>
+						<td class="col-xs-2"><span t-field="l.product_id.di_categorie_id"/></td>
+						<td style="border-left: 1px solid black;" class="col-xs-2">Poids net</td>
+						<td class="col-xs-2"><span t-esc="poids"/><span> kg</span></td>
+					</tr>
+					<tr><td style="height:20px;border-left:1px solid black;" colspan="4"></td></tr>					
+					<tr>					
+						<td style="text-align: center;height:140px;" colspan="4" class="col-xs-8">
+							<t t-if="l.order_id">
+								<t t-set="barcode" t-value="chr(29) + '020' +  l.product_id.barcode + chr(29) + '3102' + str(int(round(poids*100))).rjust(6,'0') + chr(29) + '10' + l.order_id.name" />
+								<t t-set="barcode_txt" t-value="'(02)0' +  l.product_id.barcode + '(3102)' + str(int(round(poids*100))).rjust(6,'0') + '(10)' + l.order_id.name" />
+							</t>								
+							<t t-else="">
+								<t t-set="barcode" t-value="chr(29) + '020' +  l.product_id.barcode + chr(29) + '3102' + str(int(round(poids*100))).rjust(6,'0') + chr(29) + '10' + l.di_lot_txt" />
+								<t t-set="barcode_txt" t-value="'(02)0' +  l.product_id.barcode + '(3102)' + str(int(round(poids*100))).rjust(6,'0') + '(10)' + l.di_lot_txt" />
+							</t>
+							<img t-if="l.product_id.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', barcode, 600, 100)" style="width:100%"/>
+							<span t-esc="barcode_txt" />
+						</td>
+					</tr>		
+				</table>
+				<p/>
+			</t>
+		</div>
+	</template>
+	<!-- Edition des étiquettes achat depuis la commande d'achat-->
+	<template id="di_order_report_lot_label">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="doc">
+				<div class="page">
+					<t t-foreach="doc.order_line" t-as="l">
+						<t t-call="difodoo_fichiers_base.di_report_lot_label">
+							<t t-set="l" t-value="l"/>
+							<t t-set="doc" t-value="doc"/>
+						</t>
+					</t>
+				</div>
+			</t>
+		</t>
+	</template>
+	<!-- Edition des étiquettes achat depuis la fiche article en passant par un wizard pour saisie lot/poids/qté-->
+	<template id="di_wiz_imp_report_etiqlot">
+		<t t-call="web.basic_layout">
+			<t t-foreach="docs" t-as="doc">
+				<div class="page">
+					<t t-call="difodoo_fichiers_base.di_report_lot_label">
+						<t t-set="l" t-value="doc"/>
+						<t t-set="doc" t-value="doc"/>
+					</t>
+				</div>
+			</t>
+		</t>
+	</template>
+	<!-- Création du formats de papier étiquette-->
+	<record id="di_etiq_11_5" model="report.paperformat">
+		<field name="name">Etiquette 11x5</field>
+		<field name="default" eval="True" />
+		<field name="format">custom</field>
+		<field name="page_height">50</field>
+		<field name="page_width">110</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">2</field>
+		<field name="margin_bottom">2</field>
+		<field name="margin_left">2</field>
+		<field name="margin_right">2</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">0</field>
+		<field name="dpi">200</field>
+	</record>
+	<record id="di_etiq_10_8" model="report.paperformat">
+		<field name="name">Etiquette 10x8</field>
+		<field name="default" eval="True" />
+		<field name="format">custom</field>
+		<field name="page_height">80</field>
+		<field name="page_width">100</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">2</field>
+		<field name="margin_bottom">2</field>
+		<field name="margin_left">2</field>
+		<field name="margin_right">2</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">0</field>
+		<field name="dpi">200</field>
+	</record>
+	<!-- Surcharge rapports étiquettes pour changement de format papier -->
+	<report
+		id="product.report_product_label"
+		string="Products Label"
+		model="product.product"
+		report_type="qweb-pdf"
+		name="product.report_productlabel"
+		file="product.report_productlabel"
+		print_report_name="'Products Labels - %s' % (object.name)"
+		paperformat="difodoo_fichiers_base.di_etiq_10_8"
+	/>
+	<report
+		id="product.report_product_template_label"
+		string="Products Label"
+		model="product.template"
+		report_type="qweb-pdf"
+		name="product.report_producttemplatelabel"
+		file="product.report_producttemplatelabel"
+		print_report_name="'Products Labels - %s' % (object.name)"
+		paperformat="difodoo_fichiers_base.di_etiq_10_8"
+	/>
+</odoo>

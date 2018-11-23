@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Origine -->
+    <record id="view_origine_tree" model="ir.ui.view">
+        <field name="name">di.origine.tree</field>
+        <field name="model">di.origine</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Origine">
+                <field name="name"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_origine_form" model="ir.ui.view">
+        <field name="name">di.origine.form</field>
+        <field name="model">di.origine</field>
+        <field name="arch" type="xml">
+            <form string="Origine">
+                <sheet modifiers="{}" string="Origine">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_origine" model="ir.actions.act_window">
+        <field name="name">Origines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.origine</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les origines
+			</p>
+        </field>
+    </record>
+    <!--Catégorie -->
+    <record id="view_categorie_tree" model="ir.ui.view">
+        <field name="name">di.categorie.tree</field>
+        <field name="model">di.categorie</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Catégorie">
+                <field name="name"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_categorie_form" model="ir.ui.view">
+        <field name="name">di.categorie.form</field>
+        <field name="model">di.categorie</field>
+        <field name="arch" type="xml">
+            <form string="Catégorie">
+                <sheet modifiers="{}" string="Catégorie">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_categorie" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.categorie</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les catégories
+			</p>
+        </field>
+    </record>
+    <!--Marque -->
+    <record id="view_marque_tree" model="ir.ui.view">
+        <field name="name">di.marque.tree</field>
+        <field name="model">di.marque</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Marque">
+                <field name="name"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_marque_form" model="ir.ui.view">
+        <field name="name">di.marque.form</field>
+        <field name="model">di.marque</field>
+        <field name="arch" type="xml">
+            <form string="Marque">
+                <sheet modifiers="{}" string="Marque">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_marque" model="ir.actions.act_window">
+        <field name="name">Marques</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.marque</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les marques
+			</p>
+        </field>
+    </record>
+    <!--Calibre -->
+    <record id="view_calibre_tree" model="ir.ui.view">
+        <field name="name">di.calibre.tree</field>
+        <field name="model">di.calibre</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Calibre">
+                <field name="name"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_calibre_form" model="ir.ui.view">
+        <field name="name">di.calibre.form</field>
+        <field name="model">di.calibre</field>
+        <field name="arch" type="xml">
+            <form string="Calibre">
+                <sheet modifiers="{}" string="Calibre">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_calibre" model="ir.actions.act_window">
+        <field name="name">Calibres</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.calibre</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les calibres
+			</p>
+        </field>
+    </record>
+    <!--Stations  -->
+    <record id="view_station_tree" model="ir.ui.view">
+        <field name="name">di.station.tree</field>
+        <field name="model">di.station</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Station">
+                <field name="name"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_station_form" model="ir.ui.view">
+        <field name="name">di.station.form</field>
+        <field name="model">di.station</field>
+        <field name="arch" type="xml">
+            <form string="Station">
+                <sheet modifiers="{}" string="Station">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_station" model="ir.actions.act_window">
+        <field name="name">Stations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.station</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les stations
+			</p>
+        </field>
+    </record>
+    <!--Code tarif -->
+    <record id="view_code_tarif_tree" model="ir.ui.view">
+        <field name="name">di.code.tarif.tree</field>
+        <field name="model">di.code.tarif</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Code tarif">
+                <field name="name"/>
+                <field name="di_des"/>
+                <field name="di_coef"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_code_tarif_form" model="ir.ui.view">
+        <field name="name">di.code.tarif.form</field>
+        <field name="model">di.code.tarif</field>
+        <field name="arch" type="xml">
+            <form string="Code tarif">
+                <sheet modifiers="{}" string="Code tarif">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                        <field name="di_coef"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_code_tarif" model="ir.actions.act_window">
+        <field name="name">Codes tarifs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.code.tarif</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Aide
+            </p>
+            <p>
+                Cliquer pour gérer les codes tarifs
+            </p>
+        </field>
+    </record>
+    <!--Conditionnement par défaut  -->
+    <record id="view_cond_defaut_tree" model="ir.ui.view">
+        <field name="name">di.conddefaut.tree</field>
+        <field name="model">di.conddefaut</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Conditionnement par défaut">
+                <field name="name"/>
+                <field name="di_des"/>
+                <field name="di_type_cond"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_cond_defaut_form" model="ir.ui.view">
+        <field name="name">di.conddefaut.form</field>
+        <field name="model">di.conddefaut</field>
+        <field name="arch" type="xml">
+            <form string="Conditionnement par défaut">
+                <sheet modifiers="{}" string="Conditionnement par défaut">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="name"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                        <field modifiers="{'required':true}" name="di_type_cond"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_cond_defaut" model="ir.actions.act_window">
+        <field name="name">Conditionnements par défaut</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.conddefaut</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+				Aide
+			</p>
+            <p>
+				Cliquer pour gérer les Conditionnement par défaut
+			</p>
+        </field>
+    </record>
+    <!-- Tarifs -->
+    <record id="view_tarifs_tree" model="ir.ui.view">
+        <field name="name">di.tarifs.tree</field>
+        <field name="model">di.tarifs</field>
+        <field name="arch" type="xml">
+            <tree default_order="di_date_effet desc,di_product_id"
+                editable="bottom" string="Tarifs de vente">
+                <field name="di_product_id"/>
+                <field invisible="1" name="di_product_tmpl_id"/>
+                <!-- <field name="di_partner_id" domain="[('customer','=',True),('parent_id','=',False)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}'/>   On va l'afficher plus tard-->
+                <field name="di_code_tarif_id"/>
+                <field name="di_un_prix"/>
+                <field
+                    attrs="{'readonly': [('di_un_prix', '!=', 'COLIS')],'required':[('di_un_prix','=','COLIS')]}"
+                    context="{ 'default_product_id': di_product_tmpl_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}"
+                    domain="[('di_product_tmpl_id','=',di_product_tmpl_id),('di_type_cond','=','COLIS')]"
+                    groups="product.group_stock_packaging" name="di_type_colis_id"/>
+                <field
+                    attrs="{'readonly': [('di_un_prix', '!=', 'PALETTE')],'required':[('di_un_prix','=','PALETTE')]}"
+                    context="{ 'default_product_id': di_product_tmpl_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}"
+                    domain="[('di_product_tmpl_id','=',di_product_tmpl_id),('di_type_cond','=','PALETTE')]"
+                    groups="product.group_stock_packaging" name="di_type_palette_id"/>
+                <field name="di_qte_seuil"/>
+                <field name="di_date_effet"/>
+                <field name="di_date_fin"/>
+                <field name="di_prix"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_code_tarif_form" model="ir.ui.view">
+        <field name="name">di.tarif.form</field>
+        <field name="model">di.tarifs</field>
+        <field name="arch" type="xml">
+            <form string="Tarifs de vente">
+                <sheet modifiers="{}" string="Tarifs de vente">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="di_product_id"/>
+                        <field invisible="1" name="di_product_tmpl_id"/>
+                        <!-- <field name="di_partner_id" domain="[('customer','=',True),('parent_id','=',False)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}'/> -->
+                        <field modifiers="{'required':true}" name="di_code_tarif_id"/>
+                        <field modifiers="{'required':true}" name="di_un_prix"/>
+                        <field
+                            attrs="{'readonly': [('di_un_prix', '!=', 'COLIS')],'required':[('di_un_prix','=','COLIS')]}"
+                            context="{ 'default_product_id': di_product_tmpl_id, 'tree_view_ref':'product.product_packaging_tree_view',                              'form_view_ref':'product.product_packaging_form_view'}"
+                            domain="[('di_product_tmpl_id','=',di_product_tmpl_id),('di_type_cond','=','COLIS')]"
+                            groups="product.group_stock_packaging" name="di_type_colis_id"/>
+                        <field
+                            attrs="{'readonly': [('di_un_prix', '!=', 'PALETTE')],'required':[('di_un_prix','=','PALETTE')]}"
+                            context="{ 'default_product_id': di_product_tmpl_id, 'tree_view_ref':'product.product_packaging_tree_view',                              'form_view_ref':'product.product_packaging_form_view'}"
+                            domain="[('di_product_tmpl_id','=',di_product_tmpl_id),('di_type_cond','=','PALETTE')]"
+                            groups="product.group_stock_packaging" name="di_type_palette_id"/>
+                        <field name="di_qte_seuil"/>
+                        <field modifiers="{'required':true}" name="di_date_effet"/>
+                        <field name="di_date_fin"/>
+                        <field name="di_prix"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_tarifs" model="ir.actions.act_window">
+        <field name="name">Tarifs de vente</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.tarifs</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Aide
+            </p>
+            <p>
+                Cliquer pour gérer les Tarifs
+            </p>
+        </field>
+    </record>
+    <!--Coûts -->
+    <record id="view_couts_tree" model="ir.ui.view">
+        <field name="name">di.couts.tree</field>
+        <field name="model">di.cout</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Coûts">
+                <field name="di_product_id" readonly="1"/>
+                <field name="di_date" readonly="1" string="Date"/>
+                <field name="di_cmp" readonly="1"/>
+                <field name="di_qte" readonly="1" string="Quantité"/>
+                <field name="di_poin" readonly="1" string="Poids"/>
+                <field name="di_nbpiece" readonly="1" string="Pièces"/>
+                <field name="di_nbcol" readonly="1" string="Colis"/>
+                <field name="di_nbpal" readonly="1" string="Palettes"/>
+                <field name="di_mont" readonly="1" string="Valorisation"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_couts_form" model="ir.ui.view">
+        <field name="name">di.couts.form</field>
+        <field name="model">di.cout</field>
+        <field name="arch" type="xml">
+            <form string="Coûts">
+                <sheet modifiers="{}" string="Coûts">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field name="di_product_id" readonly="1"/>
+                        <field name="di_date" readonly="1" string="Date"/>
+                        <field name="di_cmp" readonly="1"/>
+                        <field name="di_qte" readonly="1" string="Quantité"/>
+                        <field name="di_poin" readonly="1" string="Poids"/>
+                        <field name="di_nbpiece" readonly="1" string="Pièces"/>
+                        <field name="di_nbcol" readonly="1" string="Colis"/>
+                        <field name="di_nbpal" readonly="1" string="Palettes"/>
+                        <field name="di_mont" readonly="1" string="Valorisation"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_couts" model="ir.actions.act_window">
+        <field name="name">Coûts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.cout</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Aide
+            </p>
+        </field>
+    </record>
+    <!--Paramétrage -->
+    <record id="view_param_tree" model="ir.ui.view">
+        <field name="name">di.param.tree</field>
+        <field name="model">di.param</field>
+        <field name="arch" type="xml">
+            <tree default_order="di_company_id" string="Paramètres">
+                <field name="di_company_id" readonly="1"/>
+                <!-- <field name="di_horizon" /> -->
+                <!-- <field name="di_printer_id" />
+                <field name="di_label_id" />
+                <field name="di_printer_ach_id" />
+                <field name="di_label_ach_id" />  -->
+            </tree>
+        </field>
+    </record>
+    <record id="view_param_form" model="ir.ui.view">
+        <field name="name">di.param.form</field>
+        <field name="model">di.param</field>
+        <field eval="15" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Paramètres">
+                <sheet modifiers="{}" string="Paramètres">
+                    <group>
+                        <group string="Généralités">
+                            <field can_create="true" can_write="true"
+                                name="di_company_id" readonly="1"/>
+                            <group string="Ventes">
+                                <field name="di_horizon"/>
+                                <field name="di_seuil_marge_prc"/>
+                            </group>
+                            <group string="Achats">                            
+                                <field name="di_mode_grille_ach"/>
+                                <field name="di_horizon_ach" attrs="{'invisible': [('di_mode_grille_ach', '!=', 'HORIZON')]}"/>
+                                <field name="di_nbcde_ach" attrs="{'invisible': [('di_mode_grille_ach', '!=', 'NBCDE')]}"/>
+                            </group>
+                        </group>
+                        <group string="Impressions">
+                            <field name="di_printer_id"/>
+                            <field name="di_label_id"/>
+                            <field name="di_printer_ach_id"/>
+                            <field name="di_label_ach_id"/>
+                        </group>
+                        <group string="Comptabilité">
+                            <field name="di_compta_prg"/>
+                            <field name="di_dos_compt"/>
+                            <field name="di_etb_compt"/>
+                            <field name="di_nom_exp_ecr_compta"/>
+                        </group>
+                        <group string="Facturation">                           
+                            <group string="Ventes">
+                                <field name="di_autovalid_fact_ven"/>
+                                <field name="di_autoimp_fact_ven"/>
+                            </group>                           
+                        </group>
+                        <group>
+                            <field name="di_seq_art"/>
+                            <field name="di_seq_cli"/>
+                            <field name="di_seq_fou"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_param" model="ir.actions.act_window">
+        <field name="name">Paramètres</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.param</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Paramétrage
+            </p>
+            <p>
+                Cliquer pour gérer les paramètres
+            </p>
+        </field>
+    </record>
+    <!--Code destination -->
+    <record id="view_code_dest_tree" model="ir.ui.view">
+        <field name="name">di.code.dest.tree</field>
+        <field name="model">di.code.dest</field>
+        <field name="arch" type="xml">
+            <tree default_order="name" string="Code destination">
+                <field name="name"/>
+                <field name="country_id"/>
+                <field name="di_code_dest" string="Code"/>
+                <field name="di_des"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_code_dest_form" model="ir.ui.view">
+        <field name="name">di.code.dest.form</field>
+        <field name="model">di.code.dest</field>
+        <field name="arch" type="xml">
+            <form string="Code destination">
+                <sheet modifiers="{}" string="Code destination">
+                    <group>
+                        <field can_create="true" can_write="true"
+                            modifiers="{'readonly':true}" name="di_company_id"/>
+                        <field modifiers="{'required':true}" name="country_id"/>
+                        <field modifiers="{'required':true}" name="di_code_dest"/>
+                        <field modifiers="{'required':true}" name="di_des"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="di_action_code_dest" model="ir.actions.act_window">
+        <field name="name">Codes destinations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">di.code.dest</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Aide
+            </p>
+            <p>
+                Cliquer pour gérer les codes destinations pour les grilles transporteurs
+            </p>
+        </field>
+    </record>
+</odoo>
