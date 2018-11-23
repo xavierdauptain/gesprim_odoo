@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="di_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+		<xpath expr="//div[@class='col-3'][3]" position="after">
+			<div t-if="o.di_demdt" class="col-3">
+				<strong>Date demandée:</strong>
+				<p t-field="o.di_demdt" />
+			</div>
+		</xpath>
+		<!-- Modification sur entêtes de colonnes -->
+		<xpath expr="//table/thead/tr/th[5]" position="after">
+			<th>Unité Prix</th>
+		</xpath>
+		<xpath expr="//table/thead/tr/th[3]" position="replace">
+		</xpath>
+		<xpath expr="//table/thead/tr/th[2]" position="replace">
+		</xpath>
+		<xpath expr="//table/thead/tr/th[1]" position="after">
+			<th>
+				<div>Nb Pièces/</div>
+				<div>Catégorie</div>
+			</th>
+			<th>
+				<div>Nb Colis/</div>
+				<div>Origine</div>
+			</th>
+			<th>
+				<div>Type Colis/</div>
+				<div>Marque</div>
+			</th>
+			<th>
+				<div>Poids Net/</div>
+				<div>Calibre</div>
+			</th>
+		</xpath>
+		<!-- Modification sur le contenu des colonnes -->
+		<xpath expr="//table/tbody/tr/td[5]" position="after">
+			<td>
+				<span t-field="line.di_un_prix" />
+			</td>
+		</xpath>
+		<xpath expr="//table/tbody/tr/td[3]" position="replace">
+		</xpath>
+		<xpath expr="//table/tbody/tr/td[2]" position="replace">
+		</xpath>
+		<xpath expr="//table/tbody/tr/td[1]" position="after">
+			<td class="text-right">
+				<!-- on masque le nb pièces si prix au kg -->
+				<t t-if="line.di_un_prix != 'KG'">
+					<div t-field="line.di_nb_pieces" />
+					<div t-field="line.product_id.product_tmpl_id.di_categorie_id" />
+				</t>
+				<t t-if="line.di_un_prix == 'KG'">
+					<div>&amp;nbsp;</div>
+					<div t-field="line.product_id.product_tmpl_id.di_categorie_id" />
+				</t>
+			</td>
+			<td class="text-right">
+				<div t-field="line.di_nb_colis" />
+				<div t-field="line.product_id.product_tmpl_id.di_origine_id" />
+			</td>
+			<td>
+				<div t-field="line.product_packaging" />
+				<div t-field="line.product_id.product_tmpl_id.di_marque_id" />
+			</td>
+			<td class="text-right">
+				<div t-field="line.di_poin" />
+				<div t-field="line.product_id.product_tmpl_id.di_calibre_id" />
+			</td>
+		</xpath>
+	</template>
+	<!-- déclaration rapport pour édition d'étiquettes depuis la commande fournisseur -->
+	<report
+		id="di_action_report_etiq"
+		string="Etiquettes"
+		model="purchase.order"
+		report_type="qweb-pdf"
+		file="difodoo_fichiers_base.di_order_report_lot_label"
+		name="difodoo_fichiers_base.di_order_report_lot_label"
+		print_report_name="'Etiquettes - %s' % (object.name)"
+		paperformat="difodoo_fichiers_base.di_etiq_10_8"
+	/>
+	<!-- rapport permettant de lancer l'impression du bon de réception depuis la commande fournisseur -->
+	<template id="di_report_po_br">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-set="picking" t-value="env['stock.picking']" />
+				<t t-set="po_picking" t-value="picking.search([('origin', '=', o.name)])" />
+				<t t-foreach="po_picking" t-as="pick">
+				    <t t-foreach="range(pick.di_nbex)" t-as="n">
+    					<t t-call="stock.report_picking">
+    						<t t-set="docs" t-value="pick" />
+    					</t>
+    				</t>
+				</t>
+			</t>
+		</t>
+	</template>
+	<!-- déclaration rapport pour édition bon de reception depuis commande fournisseur -->
+	<report
+		id="di_action_report_br"
+		string="Bon de réception"
+		model="purchase.order"
+		report_type="qweb-pdf"
+        name="difodoo_achats.di_report_po_br"
+        file="difodoo_achats.di_report_po_br"
+        print_report_name="'Picking Operations - %s - %s' % (object.partner_id.name or '', object.name)"
+	/>
+	
+	<template id="di_report_purchaseorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="range(o.di_nbex)" t-as="n">
+                    <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
+                </t>        
+            </t>
+        </t>
+    </template>
+    <template id="di_report_purchasequotation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="range(o.di_nbex)" t-as="n">
+                    <t t-call="purchase.report_purchasequotation_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <report 
+            string="Purchase Order" 
+            id="purchase.action_report_purchase_order" 
+            model="purchase.order" 
+            report_type="qweb-pdf"
+            name="difodoo_achats.di_report_purchaseorder" 
+            file="difodoo_achats.di_report_purchaseorder"
+            print_report_name="
+                (object.state in ('draft', 'sent') and 'Request for Quotation - %s' % (object.name) or
+                'Purchase Order - %s' % (object.name))"
+        />
+
+        <report 
+            string="Request for Quotation" 
+            id="purchase.report_purchase_quotation" 
+            model="purchase.order" 
+            report_type="qweb-pdf"
+            name="difodoo_achats.di_report_purchasequotation" 
+            file="difodoo_achats.di_report_purchasequotation"
+            print_report_name="'Request for Quotation - %s' % (object.name)"
+        />
+        
+</odoo>
